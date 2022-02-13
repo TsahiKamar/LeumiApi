@@ -60,8 +60,34 @@ namespace Brainlab1.Controllers
                 _logger.Log(LogLevel.Error, ex.ToString(), null);
                 return StatusCode(500);
             }
-            return result; 
+            return Ok(result); 
         }
+
+        [HttpGet("CreateShapes")]
+        public ActionResult<IEnumerable<dynamic>> CreateShapes()
+        {
+            try
+            {
+
+            var random = new Random();
+            var list = new List<string> { "Circle", "Rectangle", "Triangle"};
+            int index = random.Next(list.Count);
+
+            //list[index]
+            //shape = DrawBL.CreateShape(request);
+            // _SHAPES.Add(shape);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(LogLevel.Error, ex.ToString(), null);
+                return StatusCode(500);
+            }
+            return Ok();//tbc
+
+
+        }
+
 
 
         [HttpPost("CreateShape")]

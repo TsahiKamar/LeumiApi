@@ -11,7 +11,6 @@ namespace Brainlab1
         public static dynamic CreateShape(string request) 
         {
 
-
             JObject data = JObject.Parse(request);
             var type = data["Type"].ToString();
 
@@ -26,7 +25,7 @@ namespace Brainlab1
 
                     break;
                 case "Rectangle":
-                    shape =new Brainlab1.Entities.Rectangle() { Type = type, XY1 = data["XY1"].ToObject<Point>(), XY2 = data["XY2"].ToObject<Point>() } ;
+                    shape =new Rectangle() { Type = type, XY1 = data["XY1"].ToObject<Point>(), XY2 = data["XY2"].ToObject<Point>() } ;
                     break;
             }
             return shape;
