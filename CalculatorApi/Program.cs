@@ -1,4 +1,6 @@
 
+using Api.DataAccess;
+using CalculatorApi;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -14,11 +16,22 @@ builder.Services.AddCors(options =>
         );
 
 
-
 builder.Services.AddControllers();
+
+//builder.Services.AddSingleton<ICalcBL, CalculatorApi.CalcBL>();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyNewDatabase"));
+
+});
+
 
 
 var app = builder.Build();
@@ -34,11 +47,9 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 
-//app.MapControllers();
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Shapes}/{action=Index}/{id?}");
+    pattern: "{controller=Calc}/{action=Index}/{id?}");
 
 
 app.Run();
